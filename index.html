@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!--
+    Author: Anthony Trejo
+    Project: Health Insurance Risk Caculator
+    
+    All Rights Rserved.
+-->
+
+<head>
+    <meta charset="UTF-8">
+    <title>Risk Caculator</title>
+</head>
+
+<body style="background-color:rgb(146, 206, 230);"></body>
+
+<body>
+    <h1>Health Insurance Risk Cacuator</h1>
+    <p>Welcome to Health Insurance Risk Caculator. 
+        To begin, you will read each question and choose from the drop down. 
+        The options will be age, height, weight, blood pressure, and any known
+        family diseases. Make sure to put each answer correct. This will help us 
+        find your health risk. 
+    </p>
+
+    <label>What is your age?</label><br />
+    <select id="ageID">
+        <option value="0">Less than 30</option>
+        <option value="10">30 to 45</option>
+        <option value="20">45 to 60</option>
+        <option value="30">Greater than 60</option> 
+    </select>
+
+    <br /><br />
+
+    <label>Client's weight in pounds</label>
+
+    <select id='weightID'>
+      <option value='100'>100</option>
+      <option value='110'>110</option>
+      <option value='120'>120</option>
+      <option value='130'>130</option>
+      <option value='140'>140</option>
+      <option value='150'>150</option>
+      <option value='160'>160</option>
+      <option value='170'>170</option>
+      <option value='180'>180</option>
+      <option value='190'>190</option>
+      <option value='200'>200</option>
+      <option value='210'>210</option>
+      <option value='220'>220</option>
+      <option value='230'>230</option>
+      <option value='240'>240</option>
+      <option value='250'>250</option>
+      <option value='260'>260</option>
+      <option value='270'>270</option>
+      <option value='280'>280</option>
+      <option value='290'>290</option>
+      <option value='300'>300</option>
+      <option value='310'>310</option>
+    </select>
+    <br /><br />
+
+    <label>Clients height in inches</label>
+
+    <br /><br />
+    <select id='heightID'>
+      <option value='54'>54</option>
+      <option value='56'>56</option>
+      <option value='58'>58</option>
+      <option value='60'>60</option>
+      <option value='62'>62</option>
+      <option value='64'>64</option>
+      <option value='66'>66</option>
+      <option value='68'>68</option>
+      <option value='70'>70</option>
+      <option value='72'>72</option>
+      <option value='74'>74</option>
+      <option value='76'>76</option>
+      <option value='78'>78</option>
+      <option value='80'>80</option>
+      <option value='82'>82</option>
+      <option value='84'>84</option>
+    </select>
+    <br /><br />
+
+    <label>Family History Conditions</label>
+
+    <br /><br />
+     <select id='conditionsID'>
+      <option value='10'>Diabetes</option>
+      <option value='10'>Cancer</option>
+      <option value='10'>Alzheimer's</option>
+      <option value='0'>None</option>
+    </select>
+    <br /><br />
+
+
+    <label>What is your pressure?</label><br />
+    <select id="pressureID">
+        <option value="0">normal</option>
+        <option value="15">elevated</option>
+        <option value="30">Stage 1</option>
+        <option value="75">Stage 2</option> 
+        <option value="100">Crisis</option> 
+    </select>
+    <br /><br /> 
+
+    <br /><br /><br />
+    <button onclick="calculateRisk()">Calculate Risk</button>
+    <p id="riskID"></p>
+
+    <br />
+
+    <p id='test' ></p>
+
+<script>
+console.log("Starting Health Insurance Risk Caculator");
+
+function calculateRisk() {
+    console.log("calculateRisk()");
+
+    let bmi = ''
+    bmi = (document.getElementById('weightID').selectedOptions[0].value / Math.pow(document.getElementById('heightID').selectedOptions[0].value , 2)) * 703
+    console.log(bmi)
+
+    let bmiScore = ''
+    if (bmi< 24.9 )
+      bmiScore = 0
+    else if (25< bmi < 30)
+      bmiScore = 40
+    else 
+      bmiScore = 75
+    
+      // Get the current values of the dropdown controls.
+    let ageResponseValue = parseInt(document.getElementById('ageID').selectedOptions[0].value); 
+    console.log("ageResponse = " + ageResponseValue);
+    let weightResponseValue = parseInt(document.getElementById('weightID').selectedOptions[0].value);
+    console.log("weightResponse = " + weightResponseValue);
+    let heightResponseValue = parseInt(document.getElementById('heightID').selectedOptions[0].value);
+    console.log("heightResponse = " + heightResponseValue);
+    let conditionsResponseValue = parseInt(document.getElementById('conditionsID').selectedOptions[0].value);
+    console.log("condistionResponse = " + conditionsResponseValue);
+    let pressureResponseValue = parseInt(document.getElementById('pressureID').selectedOptions[0].value);
+    console.log("pressureResponse = " + pressureResponseValue);
+    let riskValue = bmiScore;
+
+   
+
+    // Calculate total risk.
+   let totalRisk = ageResponseValue + weightResponseValue + heightResponseValue + conditionsResponseValue + pressureResponseValue + bmiScore
+   console.log("totalRisk = " + totalRisk)
+
+   document.getElementById("riskID").innerHTML = "Your total risk is: " + totalRisk;
+
+   let test = ""
+    if (totalRisk > 75) {
+      test = 'Do not Inssure'
+    } else if ( 50 <= totalRisk && totalRisk < 75 ) {
+      test = 'High Risk'
+    } else if (20 <= totalRisk && totalRisk < 50) {
+      test = 'Morderate Risk'
+    } else {
+      test = 'Low Risk'
+    }  
+
+
+    document.getElementById('test').innerHTML = test
+
+}
+    
+</script>
+</body>
+</html>
